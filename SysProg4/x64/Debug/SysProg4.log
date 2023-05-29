@@ -1,0 +1,3 @@
+﻿  Source.cpp
+C:\Users\Simon\source\repos\SysProg4\SysProg4\Header.h(66,55): warning C4267: аргумент: преобразование из "size_t" в "DWORD"; возможна потеря данных
+  SysProg4.vcxproj -> C:\Users\Simon\source\repos\SysProg4\x64\Debug\SysProg4.exe
