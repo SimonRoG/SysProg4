@@ -4,6 +4,7 @@
 #include <vector>
 #include <stdio.h>
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <thread>
 #include <chrono>
@@ -15,7 +16,7 @@ DWORD WINAPI FirstChildProcess(LPVOID lpParam) {
     int numThreads = *(int*)lpParam;
     HANDLE hFile = CreateFile(L"C:\\FILE21\\file11.txt", GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     if (hFile == INVALID_HANDLE_VALUE) {
-        printf("Помилка створення файлу №1\n");
+        printf("ГЏГ®Г¬ГЁГ«ГЄГ  Г±ГІГўГ®Г°ГҐГ­Г­Гї ГґГ Г©Г«Гі В№1\n");
         return 1;
     }
     DWORD bytesWritten;
@@ -23,14 +24,14 @@ DWORD WINAPI FirstChildProcess(LPVOID lpParam) {
     CloseHandle(hFile);
     hFile = CreateFile(L"C:\\FILE21\\file11.txt", GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (hFile == INVALID_HANDLE_VALUE) {
-        printf("Помилка відкриття файлу №1\n");
+        printf("ГЏГ®Г¬ГЁГ«ГЄГ  ГўВіГ¤ГЄГ°ГЁГІГІГї ГґГ Г©Г«Гі В№1\n");
         return 1;
     }
     const int bufferSize = 128;
     char buffer[bufferSize];
     DWORD bytesRead;
     while (ReadFile(hFile, buffer, bufferSize, &bytesRead, NULL) && bytesRead > 0) {
-        // Код для передачі блоків другому потоку
+        // ГЉГ®Г¤ Г¤Г«Гї ГЇГҐГ°ГҐГ¤Г Г·Ві ГЎГ«Г®ГЄВіГў Г¤Г°ГіГЈГ®Г¬Гі ГЇГ®ГІГ®ГЄГі
     }
     CloseHandle(hFile);
     return 0;
@@ -39,7 +40,7 @@ DWORD WINAPI FirstChildProcess(LPVOID lpParam) {
 DWORD WINAPI SecondChildProcess(LPVOID lpParam) {
     HANDLE hFile = CreateFile(L"C:\\FILE21\\file11.txt", GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (hFile == INVALID_HANDLE_VALUE) {
-        printf("Помилка відкриття файлу №1\n");
+        printf("ГЏГ®Г¬ГЁГ«ГЄГ  ГўВіГ¤ГЄГ°ГЁГІГІГї ГґГ Г©Г«Гі В№1\n");
         return 1;
     }
 
@@ -50,15 +51,15 @@ DWORD WINAPI SecondChildProcess(LPVOID lpParam) {
 
     vector<string> results;
     for (int i = 0; i < numThreads; i++) {
-        // Якась обробка блоку або рядка
-        string res = to_string(i) + "Результат обробки блоку/рядка\n";
-        // Результат обробки
+        // ГџГЄГ Г±Гј Г®ГЎГ°Г®ГЎГЄГ  ГЎГ«Г®ГЄГі Г ГЎГ® Г°ГїГ¤ГЄГ 
+        string res = to_string(i) + "ГђГҐГ§ГіГ«ГјГІГ ГІ Г®ГЎГ°Г®ГЎГЄГЁ ГЎГ«Г®ГЄГі/Г°ГїГ¤ГЄГ \n";
+        // ГђГҐГ§ГіГ«ГјГІГ ГІ Г®ГЎГ°Г®ГЎГЄГЁ
         results.push_back(res);
     }
 
     hFile = CreateFile(L"C:\\FILE21\\file22.txt", GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     if (hFile == INVALID_HANDLE_VALUE) {
-        printf("Помилка створення файлу №2\n");
+        printf("ГЏГ®Г¬ГЁГ«ГЄГ  Г±ГІГўГ®Г°ГҐГ­Г­Гї ГґГ Г©Г«Гі В№2\n");
         return 1;
     }
     for (const string& result : results) {
@@ -69,7 +70,7 @@ DWORD WINAPI SecondChildProcess(LPVOID lpParam) {
 
     ifstream file("C:\\FILE21\\file22.txt");
     if (!file) {
-        printf("Помилка відкриття файлу\n");
+        printf("ГЏГ®Г¬ГЁГ«ГЄГ  ГўВіГ¤ГЄГ°ГЁГІГІГї ГґГ Г©Г«Гі\n");
         return 1;
     }
     string line;
